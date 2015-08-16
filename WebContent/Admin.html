@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>Admin</title>
+
+<script src="js/jquery-2.1.4.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/bootstrap-confirmation.js"></script>
+<script src="js/js.cookie.js"></script>
+
+<link href="css/index.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/Admin.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="./index.html">JerseyRestProject</a>
+	    	</div>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-haspopup="true"
+					aria-expanded="false"><span id="username"></span><span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#" id="sign-out">Sign Out</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	
+	<div class="container">
+		<table id="mainTable" class="table table-hover table-striped table-bordered">
+			<tr>
+				<th>User Id</th>
+				<th>Username</th>
+				<th>First Name</th>
+				<th>Middle Name</th>
+				<th>Last Name</th>
+				<th>Address</th>
+				<th>Apt/Suite/Other</th>
+				<th>City</th>
+				<th>State</th>
+				<th>Zip Code</th>
+				<th>Phone Number</th>
+				<th>Email Address</th>
+				<th>Birth Date</th>
+				<th>Delete</th>
+			</tr>
+		</table>
+		<p></p>
+		<button id="update" class="btn btn-primary btn-sm">Update List</button>
+		<table id="newUserTable" class="table table-hover table-striped table-bordered">
+			<caption><h3>New User</h3></caption>
+			<tr>
+				<th>Username</th>
+				<th>Password</th>
+				<th>First Name</th>
+				<th>Middle Name</th>
+				<th>Last Name</th>
+				<th>Address</th>
+				<th>Apt/Suite/Other</th>
+				<th>City</th>
+				<th>State</th>
+				<th>Zip Code</th>
+				<th>Phone Number</th>
+				<th>Email Address</th>
+				<th>Birth Date</th>
+			</tr>
+			<tr>
+				<td><input id="newUsername" type="text" value="TestUsername"/></td>
+				<td><input id="newPassword" type="password" value="TestPassword"/></td>
+				<td><input id="newFirstName" type="text" value="TestFirstName"/></td>
+				<td><input id="newMiddleName" type="text" value=""/></td>
+				<td><input id="newLastName" type="text" value="TestLastName"/></td>
+				<td><input id="newAddress" type="text" value="TestAddress"/></td>
+				<td><input id="newAptSuiteOther" type="text" value=""/></td>
+				<td><input id="newCity" type="text" value="TestCity"/></td>
+				<td><input id="newState" type="text" maxlength="2" value="MO"/></td>
+				<td><input id="newZipCode" type="text" value="00000"/></td>
+				<td><input id="newPhoneNumber" type="text" value="0000000000"/></td>
+				<td><input id="newEmailAddress" type="text" value=""/></td>
+				<td><input id="newBirthDate" type="date" value="1970-01-01"/></td>
+			</tr>
+		</table>
+	<button id="add" class="btn btn-primary btn-sm">Create New User</button>
+	<p></p>
+	<div id="alert" class="alert alert-danger" role="alert" hidden></div>
+</div>
+
+<script src="js/CustomAlert.js"></script>
+<script src="js/Admin.js"></script>
+<script src="js/SignOut.js"></script>
+</body>
+
+</html>

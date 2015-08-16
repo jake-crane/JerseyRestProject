@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JerseyRestProject</title>
+<script src="js/jquery-2.1.4.js"></script>
+<link href="css/index.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body style="height:100%;width:100%;">
+
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="index.html">JerseyRestProject</a>
+			</div>
+		</div>
+	</nav>
+
+<div class="container">
+		 <form class="center border">
+		  <div class="form-group">
+		    <label for="username">Username</label>
+		    <input type="text" class="form-control" id="username" placeholder="Username" required>
+		  </div>
+		  <div class="form-group">
+		    <label for="password">Password</label>
+		    <input type="password" class="form-control" id="password" placeholder="Password" required>
+		  </div>
+		  <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+		  <p></p>
+		  <div id="alert" class="alert alert-success" role="alert" hidden></div>
+		</form>
+</div>	
+	<script src="js/CustomAlert.js"></script>
+	<script src="js/index.js"></script>
+</body>
+
+</html>

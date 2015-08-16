@@ -1,0 +1,7 @@
+Add better date selector
+redirect from home page if already logged in.
+Prevent empty required fields from making requests (maybe use a form and submit data) 
+Make tables always fit screen.
+Set users table limit and make it scrollable or browseable.
+Add update feature by using inputs and adding an update button in the upper table.
+change the background of inputs that have been modified in the upper table to show clicking update will change the data.
