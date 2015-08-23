@@ -80,7 +80,7 @@ function createUser() {
 			customAlert(data.message);
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
-			customAlert(jqXHR.message, true);
+			customAlert(jqXHR.responseJSON.message, true);
 		}
 	});
 }
