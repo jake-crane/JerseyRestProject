@@ -99,7 +99,8 @@ function deleteUser(username) {
 	});
 }
 
-$("#add").click(function(event) {
+$("form").submit(function(e){
+	e.preventDefault();
 	createUser();
 });
 
