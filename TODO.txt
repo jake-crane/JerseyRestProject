@@ -1,7 +1,7 @@
 Add better date selector
 Redirect from home page if already logged in.
 Redirect from logged in pages if not logged in.
-Make tables always fit screen.
+Make tables always fit screen (maybe use bootstrap grid on admin page).
 Set users table limit and make it scrollable or browseable.
 Add update feature by using inputs and adding an update button in the upper table.
 change the background of inputs that have been modified in the upper table to show clicking update will change the data.
