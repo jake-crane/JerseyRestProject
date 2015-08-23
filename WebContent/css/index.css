@@ -25,3 +25,6 @@ body {
 	-ms-transform: translateX(-50%) translateY(-50%);
 	-o-transform: translateX(-50%) translateY(-50%);
 }
+#newUserDiv {
+	text-align:center;
+}

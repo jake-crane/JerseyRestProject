@@ -87,38 +87,32 @@ public class Users {
 	@PUT
 	public Response createUser(@Context HttpServletRequest req) {
 		Response response = null;
-		if (userIsAdmin(req)) {
+		try {
+			BufferedReader br = new BufferedReader(new InputStreamReader(req.getInputStream()));
+			String jsonInput = br.readLine();
+			User user = gson.fromJson(jsonInput, User.class);
+			user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
 			try {
-				BufferedReader br = new BufferedReader(new InputStreamReader(req.getInputStream()));
-				String jsonInput = br.readLine();
-				User user = gson.fromJson(jsonInput, User.class);
-				user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
-				try {
-					Database.getInstance().insertUser(user);
-					Message m = new Message("User Created.");
-					String json = gson.toJson(m);
-					response = Response.status(Response.Status.OK).type(MediaType.APPLICATION_JSON).entity(json).build();
-				} catch (MySQLIntegrityConstraintViolationException e) {
-					//e.printStackTrace();
-					Message m = new Message("Invalid Username.");
-					String message = gson.toJson(m);
-					response = Response.status(Response.Status.CONFLICT).type(MediaType.APPLICATION_JSON).entity(message).build();
-				} catch (SQLException e) {
-					e.printStackTrace();
-					Message m = new Message("Server Error.");
-					String jsonResponse = gson.toJson(m);
-					response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).type(MediaType.APPLICATION_JSON).entity(jsonResponse).build();
-				}
-			} catch (IOException e1) {
-				e1.printStackTrace();
-				Message m = new Message("Invalid Input.");
+				Database.getInstance().insertUser(user);
+				Message m = new Message("User Created.");
 				String json = gson.toJson(m);
-				response = Response.status(Response.Status.BAD_REQUEST).type(MediaType.APPLICATION_JSON).entity(json).build();
+				response = Response.status(Response.Status.OK).type(MediaType.APPLICATION_JSON).entity(json).build();
+			} catch (MySQLIntegrityConstraintViolationException e) {
+				//e.printStackTrace();
+				Message m = new Message("Invalid Username.");
+				String message = gson.toJson(m);
+				response = Response.status(Response.Status.CONFLICT).type(MediaType.APPLICATION_JSON).entity(message).build();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				Message m = new Message("Server Error.");
+				String jsonResponse = gson.toJson(m);
+				response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).type(MediaType.APPLICATION_JSON).entity(jsonResponse).build();
 			}
-		} else {
-			Message m = new Message("Permission denied.");
+		} catch (IOException e1) {
+			e1.printStackTrace();
+			Message m = new Message("Invalid Input.");
 			String json = gson.toJson(m);
-			response = Response.status(Response.Status.UNAUTHORIZED).type(MediaType.APPLICATION_JSON).entity(json).build();
+			response = Response.status(Response.Status.BAD_REQUEST).type(MediaType.APPLICATION_JSON).entity(json).build();
 		}
 		return response;
 	}

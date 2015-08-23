@@ -1,7 +1,8 @@
+Display to user what fields are required/optional
+Add a select tag for state selection
 Add better date selector
 Redirect from home page if already logged in.
 Redirect from logged in pages if not logged in.
-Add a form for users to create accounts.
 Prevent empty required fields from making requests (maybe use a form and submit data) 
 Make tables always fit screen.
 Set users table limit and make it scrollable or browseable.
