@@ -99,7 +99,7 @@ public class Users {
 				response = Response.status(Response.Status.OK).type(MediaType.APPLICATION_JSON).entity(json).build();
 			} catch (MySQLIntegrityConstraintViolationException e) {
 				//e.printStackTrace();
-				Message m = new Message("Invalid Username.");
+				Message m = new Message("Invalid Username or other input.");
 				String message = gson.toJson(m);
 				response = Response.status(Response.Status.CONFLICT).type(MediaType.APPLICATION_JSON).entity(message).build();
 			} catch (SQLException e) {
