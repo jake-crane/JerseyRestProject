@@ -21,6 +21,7 @@ $("form").submit(function(e){
 		contentType : "application/json",
 		data : JSON.stringify(user),
 		success : function(data, textStatus, jqXHR) {
+			$("form").prop('hidden', true);
 			customAlert(data.message);
 			var alertDiv = $('#alert');
 			alertDiv.append('<a href="./index.html">Click Here to Sign In</a>');
