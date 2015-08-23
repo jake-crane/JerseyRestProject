@@ -1,4 +1,3 @@
-Add a select tag for state selection
 Add better date selector
 Redirect from home page if already logged in.
 Redirect from logged in pages if not logged in.
