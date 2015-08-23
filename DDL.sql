@@ -71,7 +71,7 @@ CREATE TABLE user (
 	state_code char(2) NOT NULL,
 	zip_code varchar(10) NOT NULL,
 	phone_number char(10) NOT NULL,
-	email_address varchar(50), NOT NULL,
+	email_address varchar(50) NOT NULL,
 	birth_date DATE NOT NULL,
 	FOREIGN KEY (state_code) REFERENCES state(code)
 );
