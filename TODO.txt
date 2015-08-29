@@ -1,5 +1,4 @@
 Add better date selector
-Redirect from home page if already logged in.
 Redirect from logged in pages if not logged in.
 Make tables always fit screen (maybe use bootstrap grid on admin page).
 Set users table limit and make it scrollable or browseable.
