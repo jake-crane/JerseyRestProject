@@ -36,7 +36,6 @@ function update() {
 			} else {
 				customAlert(jqXHR.status + ': ' + jqXHR.statusText, true);
 			}
-			window.location = "./index.html";
 		}
 	});
 
