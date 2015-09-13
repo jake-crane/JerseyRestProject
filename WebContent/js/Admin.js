@@ -1,3 +1,21 @@
+$.ajax({
+	type : "GET",
+	url : "./rest/SessionCheck/Admin",
+	contentType : "application/json",
+	success : function(data, textStatus, jqXHR) {
+		if (!data.sessionValid && data.redirect) {
+			window.location.href = data.redirectURL;
+		}
+	},
+	error : function(jqXHR, textStatus, errorThrown) {
+		if (jqXHR.responseJSON) {
+			customAlert(jqXHR.responseJSON.message, true);
+		} else {
+			customAlert(jqXHR.status + ': ' + jqXHR.statusText, true);
+		}
+	}
+});
+
 function generateNewUsername() {
 	var newUsernameInput = $('#newUsername');
 	newUsernameInput.val("TestName" + Math.floor((Math.random() * 10000)));
@@ -13,7 +31,11 @@ function update() {
 			updateDOM(data);
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
-			customAlert(jqXHR.responseJSON.message, true);
+			if (jqXHR.responseJSON) {
+				customAlert(jqXHR.responseJSON.message, true);
+			} else {
+				customAlert(jqXHR.status + ': ' + jqXHR.statusText, true);
+			}
 			window.location = "./index.html";
 		}
 	});
@@ -80,7 +102,11 @@ function createUser() {
 			customAlert(data.message);
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
-			customAlert(jqXHR.responseJSON.message, true);
+			if (jqXHR.responseJSON) {
+				customAlert(jqXHR.responseJSON.message, true);
+			} else {
+				customAlert(jqXHR.status + ': ' + jqXHR.statusText, true);
+			}
 		}
 	});
 }
@@ -94,7 +120,11 @@ function deleteUser(username) {
 			customAlert(data.message);
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
-			customAlert(jqXHR.message, true);
+			if (jqXHR.responseJSON) {
+				customAlert(jqXHR.responseJSON.message, true);
+			} else {
+				customAlert(jqXHR.status + ': ' + jqXHR.statusText, true);
+			}
 		}
 	});
 }

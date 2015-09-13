@@ -9,6 +9,7 @@ public class Message implements Serializable {
 	private String message;
 	private boolean redirect;
 	private String redirectURL;
+	private boolean sessionValid;
 	
 	public Message(String message) {
 		this.message = message;
@@ -30,6 +31,14 @@ public class Message implements Serializable {
 	
 	public String getRedirectURL() {
 		return redirectURL;
+	}
+	
+	public boolean isSessionValid() {
+		return sessionValid;
+	}
+	
+	public void setSessionValid(boolean sessionValid) {
+		this.sessionValid = sessionValid;
 	}
 	
 }

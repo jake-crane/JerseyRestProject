@@ -3,7 +3,7 @@ $.ajax({
 	url : "./rest/SessionCheck/",
 	contentType : "application/json",
 	success : function(data, textStatus, jqXHR) {
-		if (data.redirect) {
+		if (data.sessionValid && data.redirect) {
 			window.location.href = data.redirectURL;
 		}
 	},
@@ -11,7 +11,7 @@ $.ajax({
 		if (jqXHR.responseJSON) {
 			customAlert(jqXHR.responseJSON.message, true);
 		} else {
-			customAlert(jqXHR.statusText, true);
+			customAlert(jqXHR.status + ': ' + jqXHR.statusText, true);
 		}
 	}
 });
@@ -33,7 +33,11 @@ $("form").submit(function(e){
 			}
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
-			customAlert(jqXHR.responseJSON.message, true);
+			if (jqXHR.responseJSON) {
+				customAlert(jqXHR.responseJSON.message, true);
+			} else {
+				customAlert(jqXHR.status + ': ' + jqXHR.statusText, true);
+			}
 		}
 	});
 });

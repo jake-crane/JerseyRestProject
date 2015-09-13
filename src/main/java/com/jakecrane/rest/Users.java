@@ -33,7 +33,6 @@ public class Users {
 	public Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").create();
 	
 	@GET
-	@Path("/")
 	public Response getUsers(@Context HttpServletRequest req) {
 		Response response = null;
 		if (userIsAdmin(req)) {
