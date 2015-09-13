@@ -11,7 +11,9 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -21,20 +23,19 @@ import main.java.com.jakecrane.jerseyProject.Message;
 import javax.servlet.http.Cookie;
 
 @Path("/SignOut")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class SignOut {
 	
 	public Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").create();
 
 	@POST
-	@Path("/")
-	@Consumes("application/json")
-	@Produces("application/json")
 	public Response login(@Context HttpServletRequest req, @Context HttpServletResponse res) throws IOException, SQLException, URISyntaxException {
 		removeAllCookies(req, res);
 		req.getSession().invalidate();
 		Message m = new Message("Logout Successful.");
 		String jsonOut = gson.toJson(m);
-		return Response.status(Response.Status.OK).type("application/json").entity(jsonOut).build();
+		return Response.status(Status.OK).entity(jsonOut).build();
 	}
 	
 	public void removeAllCookies(HttpServletRequest req, HttpServletResponse res) {

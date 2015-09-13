@@ -7,14 +7,17 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -28,6 +31,8 @@ import main.java.com.jakecrane.jerseyProject.Role;
 import main.java.com.jakecrane.jerseyProject.User;
  
 @Path("/Users")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class Users {
 	
 	public Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").create();
@@ -39,17 +44,17 @@ public class Users {
 			try {
 				List<User> users = Database.getInstance().getUsers();
 				String json = gson.toJson(users);
-				response = Response.status(Response.Status.OK).type(MediaType.APPLICATION_JSON).entity(json).build();
+				response = Response.status(Status.OK).entity(json).build();
 			} catch (SQLException e) {
 				e.printStackTrace();
 				Message m = new Message("Database Error.");
 				String json = gson.toJson(m);
-				response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).type(MediaType.APPLICATION_JSON).entity(json).build();
+				response = Response.status(Status.INTERNAL_SERVER_ERROR).entity(json).build();
 			}
 		} else {
 			Message m = new Message("Permission denied.");
 			String json = gson.toJson(m);
-			response = Response.status(Response.Status.UNAUTHORIZED).type(MediaType.APPLICATION_JSON).entity(json).build();
+			response = Response.status(Status.UNAUTHORIZED).entity(json).build();
 		}
 		return response;
 	}
@@ -63,22 +68,22 @@ public class Users {
 				User user = Database.getInstance().getUser(username);
 			if (user != null) {
 				String json = gson.toJson(user);
-				response = Response.status(Response.Status.OK).type(MediaType.APPLICATION_JSON).entity(json).build();
+				response = Response.status(Status.OK).entity(json).build();
 			} else {
 				Message m = new Message("User not found.");
 				String json = gson.toJson(m);
-				response = Response.status(Response.Status.NOT_FOUND).type(MediaType.APPLICATION_JSON).entity(json).build();
+				response = Response.status(Status.NOT_FOUND).entity(json).build();
 			}
 			} catch (SQLException e) {
 				e.printStackTrace();
 				Message m = new Message("Server Error.");
 				String jsonResponse = gson.toJson(m);
-				response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).type(MediaType.APPLICATION_JSON).entity(jsonResponse).build();
+				response = Response.status(Status.INTERNAL_SERVER_ERROR).entity(jsonResponse).build();
 			}
 		} else {
 			Message m = new Message("Permission denied.");
 			String json = gson.toJson(m);
-			response = Response.status(Response.Status.UNAUTHORIZED).type(MediaType.APPLICATION_JSON).entity(json).build();
+			response = Response.status(Status.UNAUTHORIZED).entity(json).build();
 		}
 		return response;
 	}
@@ -95,23 +100,23 @@ public class Users {
 				Database.getInstance().insertUser(user);
 				Message m = new Message("User Created.");
 				String json = gson.toJson(m);
-				response = Response.status(Response.Status.OK).type(MediaType.APPLICATION_JSON).entity(json).build();
+				response = Response.status(Status.OK).entity(json).build();
 			} catch (MySQLIntegrityConstraintViolationException e) {
 				//e.printStackTrace();
 				Message m = new Message("Invalid Username or other input.");
 				String message = gson.toJson(m);
-				response = Response.status(Response.Status.CONFLICT).type(MediaType.APPLICATION_JSON).entity(message).build();
+				response = Response.status(Status.CONFLICT).entity(message).build();
 			} catch (SQLException e) {
 				e.printStackTrace();
 				Message m = new Message("Server Error.");
 				String jsonResponse = gson.toJson(m);
-				response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).type(MediaType.APPLICATION_JSON).entity(jsonResponse).build();
+				response = Response.status(Status.INTERNAL_SERVER_ERROR).entity(jsonResponse).build();
 			}
 		} catch (IOException e1) {
 			e1.printStackTrace();
 			Message m = new Message("Invalid Input.");
 			String json = gson.toJson(m);
-			response = Response.status(Response.Status.BAD_REQUEST).type(MediaType.APPLICATION_JSON).entity(json).build();
+			response = Response.status(Status.BAD_REQUEST).entity(json).build();
 		}
 		return response;
 	}
@@ -125,17 +130,17 @@ public class Users {
 				Database.getInstance().deleteUser(username);
 				Message m = new Message("User deleted.");
 				String json = gson.toJson(m);
-				response = Response.status(Response.Status.OK).type(MediaType.APPLICATION_JSON).entity(json).build();
+				response = Response.status(Status.OK).entity(json).build();
 			} catch (SQLException e) {
 				e.printStackTrace();
 				Message m = new Message("Server Error.");
 				String json = gson.toJson(m);
-				response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).type(MediaType.APPLICATION_JSON).entity(json).build();
+				response = Response.status(Status.INTERNAL_SERVER_ERROR).entity(json).build();
 			}
 		} else {
 			Message m = new Message("Permission denied.");
 			String json = gson.toJson(m);
-			response = Response.status(Response.Status.UNAUTHORIZED).type(MediaType.APPLICATION_JSON).entity(json).build();
+			response = Response.status(Status.UNAUTHORIZED).entity(json).build();
 		}
 		return response;
 	}
