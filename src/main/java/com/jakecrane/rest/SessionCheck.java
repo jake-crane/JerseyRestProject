@@ -39,25 +39,21 @@ public class SessionCheck {
 			if (username != null) {
 				Role role = Database.getInstance().getRole(username);
 				if (role == Role.ADMIN) {
-					Message m = new Message("Your role is ADMIN.", true, "./Admin.html");
-					m.setSessionValid(true);
+					Message m = new Message("Your role is ADMIN.", true, "./Admin.html", true);
 					String jsonOut = gson.toJson(m);
 					response = Response.status(Status.OK).entity(jsonOut).build();
 				} else if (role == Role.USER) {
-					Message m = new Message("Your role is USER.", true, "./User.html");
-					m.setSessionValid(true);
+					Message m = new Message("Your role is USER.", true, "./User.html", true);
 					String jsonOut = gson.toJson(m);
 					response = Response.status(Status.OK).entity(jsonOut).build();
 				}
 			} else {
-				Message m = new Message("Session does not contain a username.", true, "./rest/SignOut/");
-				m.setSessionValid(true);
+				Message m = new Message("Session does not contain a username.", true, "./rest/SignOut/", true);
 				String jsonOut = gson.toJson(m);
 				response = Response.status(Status.OK).entity(jsonOut).build();
 			}
 		} else {
-			Message m = new Message("Session is Invalid.", true, "./");
-			m.setSessionValid(false);
+			Message m = new Message("Session is Invalid.", true, "./", false);
 			String jsonOut = gson.toJson(m);
 			response = Response.status(Status.OK).entity(jsonOut).build();
 		}
@@ -78,17 +74,16 @@ public class SessionCheck {
 				String jsonOut = gson.toJson(m);
 				response = Response.status(Status.OK).entity(jsonOut).build();
 			} else if (requestRole == Role.USER) {
-				Message m = new Message("Your role is not USER.", true, "./Admin.html");
+				Message m = new Message("Your role is not USER.", true, "./Admin.html", false);
 				String jsonOut = gson.toJson(m);
 				response = Response.status(Status.OK).entity(jsonOut).build();
 			} else if (requestRole == Role.ADMIN) {
-				Message m = new Message("Your role is not ADMIN.", true, "./User.html");
+				Message m = new Message("Your role is not ADMIN.", true, "./User.html", false);
 				String jsonOut = gson.toJson(m);
 				response = Response.status(Status.OK).entity(jsonOut).build();
 			}
 		} else {
-			Message m = new Message("Session is Invalid.", true, "./");
-			m.setSessionValid(false);
+			Message m = new Message("Session is Invalid.", true, "./", false);
 			String jsonOut = gson.toJson(m);
 			response = Response.status(Status.OK).entity(jsonOut).build();
 		}

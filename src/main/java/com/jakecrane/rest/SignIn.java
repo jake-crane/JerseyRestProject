@@ -46,11 +46,11 @@ public class SignIn {
 			usernameCookie.setPath(req.getContextPath() + "/");
 			res.addCookie(usernameCookie);
 			if (Database.getInstance().getRole(user.getUsername()) == Role.ADMIN) {
-				Message m = new Message("Login Successful.", true, "./Admin.html");
+				Message m = new Message("Login Successful.", true, "./Admin.html", false);
 				String jsonOut = gson.toJson(m);
 				response = Response.status(Status.OK).type("application/json").entity(jsonOut).build();
 			} else {
-				Message m = new Message("Login Successful.", true, "./User.html");
+				Message m = new Message("Login Successful.", true, "./User.html", false);
 				String jsonOut = gson.toJson(m);
 				response = Response.status(Status.OK).type("application/json").entity(jsonOut).build();
 			}

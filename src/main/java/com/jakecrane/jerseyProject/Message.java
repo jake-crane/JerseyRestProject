@@ -15,10 +15,11 @@ public class Message implements Serializable {
 		this.message = message;
 	}
 
-	public Message(String message, boolean redirect, String redirectURL) {
+	public Message(String message, boolean redirect, String redirectURL, boolean sessionValid) {
 		this.message = message;
 		this.redirect = redirect;
 		this.redirectURL = redirectURL;
+		this.sessionValid = sessionValid;
 	}
 
 	public String getMessage() {
