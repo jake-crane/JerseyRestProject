@@ -11,7 +11,7 @@ import main.java.com.jakecrane.database.Database;
 import main.java.com.jakecrane.database.UserDAO;
 import main.java.com.jakecrane.jerseyProject.User;
 
-public class DatabaseTest {
+public class UserDAOTest {
 
 	@Test
 	public void testGetConnection() {
