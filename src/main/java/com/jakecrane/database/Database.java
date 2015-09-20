@@ -26,10 +26,9 @@ public class Database {
 	public static Database instance;
 
 	private Database() {
-		try {
-			Properties properties = new Properties();
-			String propFileName = "database.properties";
-			InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
+		Properties properties = new Properties();
+		String propFileName = "database.properties";
+		try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFileName)) {
 			if (inputStream != null) {
 				properties.load(inputStream);
 				DRIVER = properties.getProperty("DATABASE_DRIVER");
