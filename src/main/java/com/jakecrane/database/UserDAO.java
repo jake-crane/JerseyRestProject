@@ -103,12 +103,11 @@ public class UserDAO {
 				
 				if (userStatment.executeUpdate() > 0) {
 					try (ResultSet rs = userStatment.getGeneratedKeys()) {
-						int userId = -1;
 						if (rs.next()) {//TODO  else break?
-							userId = rs.getInt(1);
+							user.setUserId(rs.getInt(1));
 						}
 						try (PreparedStatement userLoginStatement = connection.prepareStatement("INSERT INTO user_login VALUES (?, ?, ?, ?)")) {
-							userLoginStatement.setInt(1, userId);
+							userLoginStatement.setInt(1, user.getUserId());
 							userLoginStatement.setString(2, user.getUsername());
 							userLoginStatement.setString(3, user.getPassword());
 							userLoginStatement.setInt(4, 2);
