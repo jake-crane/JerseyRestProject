@@ -1,4 +1,3 @@
-Add banner to new user page
 Add better date selector
 Make tables always fit screen (maybe use bootstrap grid on admin page).
 Set users table limit and make it scrollable or browseable.
