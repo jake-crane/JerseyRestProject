@@ -19,7 +19,7 @@ import javax.ws.rs.core.Response.Status;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import main.java.com.jakecrane.database.Database;
+import main.java.com.jakecrane.database.UserDAO;
 import main.java.com.jakecrane.jerseyProject.Message;
 import main.java.com.jakecrane.jerseyProject.Role;
 
@@ -37,7 +37,7 @@ public class SessionCheck {
 		if (session != null) {
 			String username = (String)session.getAttribute("username");
 			if (username != null) {
-				Role role = Database.getInstance().getRole(username);
+				Role role = UserDAO.getRole(username);
 				if (role == Role.ADMIN) {
 					Message m = new Message("Your role is ADMIN.", true, "./Admin.html", true);
 					String jsonOut = gson.toJson(m);
@@ -67,7 +67,7 @@ public class SessionCheck {
 		Response response = null;
 		HttpSession session = req.getSession(false);
 		if (session != null) {
-			Role actualRole = Database.getInstance().getRole((String)session.getAttribute("username"));
+			Role actualRole = UserDAO.getRole((String)session.getAttribute("username"));
 			if (requestRole == actualRole) {
 				Message m = new Message("Session is Valid and role is correct.");
 				m.setSessionValid(true);

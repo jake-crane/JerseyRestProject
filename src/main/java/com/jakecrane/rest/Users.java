@@ -25,7 +25,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
-import main.java.com.jakecrane.database.Database;
+import main.java.com.jakecrane.database.UserDAO;
 import main.java.com.jakecrane.jerseyProject.Message;
 import main.java.com.jakecrane.jerseyProject.Role;
 import main.java.com.jakecrane.jerseyProject.User;
@@ -42,7 +42,7 @@ public class Users {
 		Response response = null;
 		if (userIsAdmin(req)) {
 			try {
-				List<User> users = Database.getInstance().getUsers();
+				List<User> users = UserDAO.getUsers();
 				String json = gson.toJson(users);
 				response = Response.status(Status.OK).entity(json).build();
 			} catch (SQLException e) {
@@ -65,7 +65,7 @@ public class Users {
 		Response response = null;
 		if (userIsAdmin(req)) {
 			try {
-				User user = Database.getInstance().getUser(username);
+				User user = UserDAO.getUser(username);
 			if (user != null) {
 				String json = gson.toJson(user);
 				response = Response.status(Status.OK).entity(json).build();
@@ -97,7 +97,7 @@ public class Users {
 			User user = gson.fromJson(jsonInput, User.class);
 			user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
 			try {
-				Database.getInstance().insertUser(user);
+				UserDAO.insertUser(user);
 				Message m = new Message("User Created.");
 				String json = gson.toJson(m);
 				response = Response.status(Status.OK).entity(json).build();
@@ -127,7 +127,7 @@ public class Users {
 		Response response = null;
 		if (userIsAdmin(req)) {
 			try {
-				Database.getInstance().deleteUser(username);
+				UserDAO.deleteUser(username);
 				Message m = new Message("User deleted.");
 				String json = gson.toJson(m);
 				response = Response.status(Status.OK).entity(json).build();
@@ -151,7 +151,7 @@ public class Users {
 		String username = (String)req.getSession().getAttribute("username");
 		Role role = null;
 		try {
-			role = Database.getInstance().getRole(username);
+			role = UserDAO.getRole(username);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

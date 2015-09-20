@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
@@ -19,8 +20,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import main.java.com.jakecrane.jerseyProject.Message;
-
-import javax.servlet.http.Cookie;
 
 @Path("/SignOut")
 @Consumes(MediaType.APPLICATION_JSON)

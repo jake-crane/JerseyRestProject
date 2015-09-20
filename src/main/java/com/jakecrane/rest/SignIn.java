@@ -21,7 +21,7 @@ import javax.ws.rs.core.Response.Status;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import main.java.com.jakecrane.database.Database;
+import main.java.com.jakecrane.database.UserDAO;
 import main.java.com.jakecrane.jerseyProject.Message;
 import main.java.com.jakecrane.jerseyProject.Role;
 import main.java.com.jakecrane.jerseyProject.User;
@@ -39,13 +39,13 @@ public class SignIn {
 		BufferedReader br = new BufferedReader(new InputStreamReader(req.getInputStream()));
 		String jsonIn = br.readLine();
 		User user = gson.fromJson(jsonIn, User.class);
-		if (Database.getInstance().credentialsAreValid(user)) {
+		if (UserDAO.credentialsAreValid(user)) {
 			req.getSession().setAttribute("username", user.getUsername());
 			Cookie usernameCookie = new Cookie("username", user.getUsername());
 			usernameCookie.setHttpOnly(false);
 			usernameCookie.setPath(req.getContextPath() + "/");
 			res.addCookie(usernameCookie);
-			if (Database.getInstance().getRole(user.getUsername()) == Role.ADMIN) {
+			if (UserDAO.getRole(user.getUsername()) == Role.ADMIN) {
 				Message m = new Message("Login Successful.", true, "./Admin.html", false);
 				String jsonOut = gson.toJson(m);
 				response = Response.status(Status.OK).type("application/json").entity(jsonOut).build();
