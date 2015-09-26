@@ -1,6 +1,7 @@
 package main.java.com.jakecrane.database;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -99,7 +100,7 @@ public class UserDAO {
 				userStatment.setString(8, user.getZipCode());
 				userStatment.setString(9, user.getPhoneNumber());
 				userStatment.setString(10, user.getEmailAddress().trim().isEmpty() ? null : user.getEmailAddress());
-				userStatment.setDate(11, new java.sql.Date(user.getBirthDate().getTime()));
+				userStatment.setDate(11, new Date(user.getBirthDate().getTime()));
 				
 				if (userStatment.executeUpdate() > 0) {
 					try (ResultSet rs = userStatment.getGeneratedKeys()) {
